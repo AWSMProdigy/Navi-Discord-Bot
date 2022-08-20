@@ -1,22 +1,27 @@
-import DiscordJS from 'discord.js';
-import dotenv from 'dotenv';
-dotenv.config();
+const {Client, GatewayIntentBits} = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds ]});
+require('dotenv').config();
 
-const client = new DiscordJS.Client({ intents: [GatewayIntentBits.Guilds ]});
-
-function sendMessage(role){
-    let role = message.guild.roles.find(r => r.name === "Batman");
-    let members = role.members.map(m=>m.user.id);
-    let index = Math.floor(Math.random() * members.length);
-    members[index].send("Hey, listen!");
+function sendMessage(){
+    const guild = client.guilds.fetch("144189777724440576");
+    const role = client.guilds.cache.roles.find("name", "Batman");
+    console.log(role);
+    // let members = role.members.map(m=>m.user.id);
+    // let index = Math.floor(Math.random() * members.length);
+    // user.send("Hey, listen!");
 }
 
 client.once('ready', () => {
 	console.log('Ready!');
-    setInterval(sendMessage, 1000);
+    const users = client.guilds.cache.get("144189777724440576").roles.cache.find((r) => r.name === 'Batman').members.find((r) => r.nickname === "No I'm Dirty Dan");
+    users.send("Hey, Listen!");
+
+    
+
+    // setInterval(sendMessage, 1000);
 });
 
 
 
 // Login to Discord with your client's token
-client.login(token);
+client.login(process.env.TOKEN);
