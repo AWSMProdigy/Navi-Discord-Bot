@@ -27,7 +27,7 @@ client.once('ready', () => {
         for (const key of guild.keys()) {
             console.log(key); 
             const server = client.guilds.resolve(key);
-            setInterval(sendMessage, 10000, server);
+            setInterval(sendMessage, 1000 * 60 * 60, server);
           }
     })
 });
