@@ -23,12 +23,13 @@ function sendMessage(server){
 
 client.once('ready', () => {
 	console.log('Ready!');
-    client.guilds.forEach((guild) => {
-        const [server_id] = client.guilds.cache.keys()
-        const server = client.guilds.resolve(server_id);
-        
-        // setInterval(sendMessage, 1000 * 60 * 60, server);
-    })    
+    client.guilds.fetch().then((guild) => {
+        for (const key of guild.keys()) {
+            console.log(key); 
+            const server = client.guilds.resolve(key);
+            setInterval(sendMessage, 1000 * 60 * 60, server);
+          }
+    })
 });
 
 
