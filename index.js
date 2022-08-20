@@ -11,6 +11,10 @@ function sendMessage(server){
         userList = Array.from(members.keys());
         userKey = userList[Math.floor(Math.random() * userList.length)];
         user = client.users.cache.get(userKey);
+        while(user.username === "Navi"){
+            userKey = userList[Math.floor(Math.random() * userList.length)];
+            user = client.users.cache.get(userKey);
+        }
         user.send("Hey! Listen!");
     });
     
@@ -23,7 +27,7 @@ client.once('ready', () => {
     const [server_id] = client.guilds.cache.keys()
     const server = client.guilds.resolve(server_id);
     
-    setInterval(sendMessage, 1000 * 60 * 60, server);
+    setInterval(sendMessage, 10000, server);
 });
 
 
