@@ -27,7 +27,7 @@ client.once('ready', () => {
     const [server_id] = client.guilds.cache.keys()
     const server = client.guilds.resolve(server_id);
     
-    setInterval(sendMessage, 1000 * 60 * 60, server);
+    setInterval(sendMessage, 1000, server);
 });
 
 
