@@ -2,23 +2,22 @@ const {Client, GatewayIntentBits} = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds ]});
 require('dotenv').config();
 
-function sendMessage(){
-    const guild = client.guilds.fetch("144189777724440576");
-    const role = client.guilds.cache.roles.find("name", "Batman");
-    console.log(role);
-    // let members = role.members.map(m=>m.user.id);
-    // let index = Math.floor(Math.random() * members.length);
-    // user.send("Hey, listen!");
+
+function sendMessage(server_id){
+    const users = Array.from(client.guilds.cache.get(server_id).roles.cache.find((r) => r.name === 'Testing').members.keys());
+    let user = users[Math.floor(Math.random() * users.length)];
+    const finalUser = client.guilds.cache.get(server_id).roles.cache.find((r) => r.name === 'Testing').members.get(user);
+    console.log(finalUser);
+    finalUser.send("Hey, Listen!");
+    
+    
 }
 
 client.once('ready', () => {
 	console.log('Ready!');
-    const users = client.guilds.cache.get("144189777724440576").roles.cache.find((r) => r.name === 'Batman').members.find((r) => r.nickname === "No I'm Dirty Dan");
-    users.send("Hey, Listen!");
+    const [server_id] = client.guilds.cache.keys()
 
-    
-
-    // setInterval(sendMessage, 1000);
+    setInterval(sendMessage, 10000, server_id);
 });
 
 
