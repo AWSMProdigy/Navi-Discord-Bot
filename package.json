@@ -1,0 +1,11 @@
+{
+    "name": "Navi",
+    "version": "1.0.0",
+    "description": "Navi bot meant to randomly message someone with the message 'Hey, listen!'",
+    "main": "bot.js",
+    "author": "Your Name",
+    "dependencies": {
+        "discord.js": "^14.2.0",
+        "dotenv": "^16.0.1"
+    }
+}
