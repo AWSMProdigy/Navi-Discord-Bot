@@ -1,23 +1,29 @@
 const {Client, GatewayIntentBits} = require('discord.js');
-const client = new Client({ intents: [GatewayIntentBits.Guilds ]});
+const client = new Client({ intents: [GatewayIntentBits.Guilds, 'GuildMembers' ]});
 require('dotenv').config();
 
 
-function sendMessage(server_id){
-    const users = Array.from(client.guilds.cache.get(server_id).roles.cache.find((r) => r.name === 'Testing').members.keys());
-    let user = users[Math.floor(Math.random() * users.length)];
-    const finalUser = client.guilds.cache.get(server_id).roles.cache.find((r) => r.name === 'Testing').members.get(user);
-    console.log(finalUser);
-    finalUser.send("Hey, Listen!");
+function sendMessage(server){
+    let userList;
+    let userKey;
+    let user;
+    server.members.fetch().then((members) => {
+        userList = Array.from(members.keys());
+        userKey = userList[Math.floor(Math.random() * userList.length)];
+        user = client.users.cache.get(userKey);
+        console.log(user);
+    });
     
     
 }
 
 client.once('ready', () => {
 	console.log('Ready!');
+    
     const [server_id] = client.guilds.cache.keys()
-
-    setInterval(sendMessage, 10000 * 60 * 30, server_id);
+    const server = client.guilds.resolve(server_id);
+    
+    setInterval(sendMessage, 1000 * 60 * 60, server);
 });
 
 
