@@ -27,14 +27,14 @@ client.once('ready', () => {
         for (const key of guild.keys()) {
             console.log(key); 
             const server = client.guilds.resolve(key);
-            setInterval(sendMessage, 1000 * 60 * 60, server);
+            // setInterval(sendMessage, 1000 * 60 * 60, server);
           }
     })
 });
 
 client.on("guildCreate", guild => {
     console.log(guild);
-    setInterval(sendMessage, 1000 * 60 * 60, guild);
+    // setInterval(sendMessage, 1000 * 60 * 60, guild);
 })
 
 
