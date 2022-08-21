@@ -8,6 +8,7 @@ function sendMessage(server){
     let userKey;
     let user;
     server.members.fetch().then((members) => {
+        console.log(server.id);
         userList = Array.from(members.keys());
         userKey = userList[Math.floor(Math.random() * userList.length)];
         user = client.users.cache.get(userKey);
@@ -27,14 +28,14 @@ client.once('ready', () => {
         for (const key of guild.keys()) {
             console.log(key); 
             const server = client.guilds.resolve(key);
-            // setInterval(sendMessage, 1000 * 60 * 60, server);
+            setInterval(sendMessage, 1000 * 60 * 60, server);
           }
     })
 });
 
 client.on("guildCreate", guild => {
     console.log(guild);
-    // setInterval(sendMessage, 1000 * 60 * 60, guild);
+    setInterval(sendMessage, 1000 * 60 * 60, guild);
 })
 
 
