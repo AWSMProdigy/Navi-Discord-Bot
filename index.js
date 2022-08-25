@@ -16,6 +16,7 @@ function sendMessage(server){
             userKey = userList[Math.floor(Math.random() * userList.length)];
             user = client.users.cache.get(userKey);
         }
+        console.log(user.username);
         user.send("Hey! Listen!");
     });
     
